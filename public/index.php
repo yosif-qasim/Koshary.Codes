@@ -22,18 +22,24 @@ define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
 define('CONTROLLER_PATH', ROOT_PATH . '..' . DIRECTORY_SEPARATOR.'controller' . DIRECTORY_SEPARATOR);
 define('MODEL_PATH', ROOT_PATH . '..' . DIRECTORY_SEPARATOR .'model' . DIRECTORY_SEPARATOR);
 
+require_once ROOT_PATH . '../src/template.php';
 
 $page = $_GET['page'] ?? 'index';
 
 // Sanitize input
-$allowedPages = ['index', 'about', 'contact']; // Define allowed pages
+$allowedPages = ['index', 'login', 'contact']; // Define allowed pages
 $page = in_array($page, $allowedPages) ? $page : '404'; // Default to 404 if page not allowed
 
-// Load view based on page
-$viewFile = VIEW_PATH . $page . '.html';
-if (file_exists($viewFile)) {
-    include $viewFile;
-} else {
-    // Handle 404
-    include VIEW_PATH . '404.html';
+
+
+if ($page == 'index') {
+    $template = new template('index');
+    $template->viewPage('landingPage',["hero","features","testimonials","team", "contact"]);
+} else if ($page == 'login') {
+    $template = new template('index' );
+    $template->viewPage('login',["loginForm"]);
+} else if ($page == '404') {
+    $template = new template('index');
+    $template->viewPage('error',["404"]);
 }
+
