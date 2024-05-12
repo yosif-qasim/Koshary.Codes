@@ -27,7 +27,7 @@ require_once ROOT_PATH . '../src/template.php';
 $page = $_GET['page'] ?? 'index';
 
 // Sanitize input
-$allowedPages = ['index', 'login', 'contact']; // Define allowed pages
+$allowedPages = ['index', 'login', 'contact','challenges']; // Define allowed pages
 $page = in_array($page, $allowedPages) ? $page : '404'; // Default to 404 if page not allowed
 
 
@@ -38,6 +38,10 @@ if ($page == 'index') {
 } else if ($page == 'login') {
     $template = new template('index' );
     $template->viewPage('login',["loginForm"]);
+} else if ($page == 'challenges') {
+
+    $template = new template('index' );
+    $template->viewPage('challenges',["challengeNavbar","codeSnippet"]);
 } else if ($page == '404') {
     $template = new template('index');
     $template->viewPage('error',["404"]);
