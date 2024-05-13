@@ -23,31 +23,43 @@ class chllengesController extends Entity{
         $variabels['challenge'] = $this;
         $template = new template('index' );
         $template->viewPage('challenges',["challengeNavbar","codeSnippet"], $variabels);
+        $this->solutionHandel();
+
+
+    }
+
+    public function solutionHandel(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $challengeId = htmlspecialchars($_POST['challengeId']);
             $solutionLine = htmlspecialchars($_POST['solutionLine']);
             $solutionType = htmlspecialchars($_POST['solutionType']);
-            if($solutionLine== 5){
-                echo "correct";
-                echo "correct";
-                echo "correct";
-                echo "correct";
-                echo "correct";
-                echo "correct";
-                echo "correct";
-                echo "correct";
-                echo "correct";
+            if($solutionLine== $this->solution){
+                echo "<div class=\"row text-center \">
+                      <div class=\" col-md-4 \" >
+                      </div>
+                       <div class=\"alert col-md-4 text-center alert-success\" role=\"alert\">
+                        Correct solution !!!!!
+
+                        <div class=\"alert alert-primary\" role=\"alert\">
+                     code source : <a href=\"" . $this->sourceLink. "\">" . $this->sourceLink ."</a>
+                    </div> 
+                    </div>
+                                          <div class=\" col-md-4 \" >
+                      </div>
+                    </div>";
+            }else{
+                echo "<div class=\"row text-center \">
+                      <div class=\" col-md-4 \" >
+                      </div>
+                       <div class=\"alert col-md-4 text-center alert-danger\" role=\"alert\">
+                        Wrong solution !!!!!
+                    </div>
+                                          <div class=\" col-md-4 \" >
+                      </div>
+                    </div>";
             }
-            //
-//            echo "ch id" . $challengeId . "<br>";
-//            echo "sol line" . $solutionLine . "<br>";
-//            echo "sol type" . $solutionType . "<br>";
-            header("Location: /koshary.codes/public/?page=challenges&challengeId=$challengeId");
-
         }
-    }
-
-    public function navChallenge(){
+//        header("Location: ./koshary.codes/public/?page=challenges&challengeId=$challengeId");
 
     }
 
