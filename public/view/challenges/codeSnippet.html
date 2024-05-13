@@ -2,17 +2,38 @@
 
 <div class="container text-center">
     <div class="row text-center">
-      <div class=" col text-center">
-      </div>
         <div class=" col text-center">
           <br>
-              <pre class=" align-content-center" id="syntaxy" data-type="default">
+              <pre class=" mb-3 row align-content-center" id="syntaxy" data-type="default">
                   <?php echo $challenge->code ?>
               </pre>
         </div>
-      <div class=" col text-center">
+
+
+      <div class="col text-center align-content-center">
+          <div class="mb-3 row">
+              <h3>Submit your solution</h3>
+          </div>
+          <form action="" method="post">
+          <input type="hidden" name="challengeId" value="<?php echo $challenge->id?>">
+          <div class="mb-3 row">
+                    <input class="form-control" name="solutionLine" id="solutionLine" type="number" placeholder="Enter line number ">
+                  </div>
+          <div class="mb-3 row">
+                  <select class="form-control" name="solutionType" >
+                      <option value="first">First Value</option>
+                      <option value="second" selected>Second Value</option>
+                      <option value="third">Third Value</option>
+                  </select>
+                  </div>
+          <button type="submit" class="btn btn-primary mb-12">Submit</button>
+          </form>
       </div>
+
+
     </div>
+</div>
+
     solution : <?php echo $challenge->solution ?>
 
 </div>

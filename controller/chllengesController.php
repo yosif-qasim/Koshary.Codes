@@ -23,6 +23,28 @@ class chllengesController extends Entity{
         $variabels['challenge'] = $this;
         $template = new template('index' );
         $template->viewPage('challenges',["challengeNavbar","codeSnippet"], $variabels);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $challengeId = htmlspecialchars($_POST['challengeId']);
+            $solutionLine = htmlspecialchars($_POST['solutionLine']);
+            $solutionType = htmlspecialchars($_POST['solutionType']);
+            if($solutionLine== 5){
+                echo "correct";
+                echo "correct";
+                echo "correct";
+                echo "correct";
+                echo "correct";
+                echo "correct";
+                echo "correct";
+                echo "correct";
+                echo "correct";
+            }
+            //
+//            echo "ch id" . $challengeId . "<br>";
+//            echo "sol line" . $solutionLine . "<br>";
+//            echo "sol type" . $solutionType . "<br>";
+            header("Location: /koshary.codes/public/?page=challenges&challengeId=$challengeId");
+
+        }
     }
 
     public function navChallenge(){
