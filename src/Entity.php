@@ -22,6 +22,7 @@ abstract class Entity
         $stmt = $this->dbc->prepare($sql);
         $stmt->execute(['value'=> $fieldValue]);
         $databaseData = $stmt->fetch();
+
         if($databaseData){
             $this->setValues($databaseData);
         }
@@ -32,7 +33,9 @@ abstract class Entity
 
         foreach ($this->fields as $fieldName) {
             $this->$fieldName = $values[$fieldName];
+
         }
+
     }
 
 }

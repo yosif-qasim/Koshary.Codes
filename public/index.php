@@ -8,7 +8,7 @@ define('MODEL_PATH', ROOT_PATH . '..' . DIRECTORY_SEPARATOR .'model' . DIRECTORY
 require_once ROOT_PATH . '../src/template.php';
 require_once ROOT_PATH . '../src/Entity.php';
 require_once ROOT_PATH . '../src/databaseConnection.php';
-require_once ROOT_PATH . '../src/chllengesController.php';
+require_once ROOT_PATH . '../controller/chllengesController.php';
 
 
 $page = $_GET['page'] ?? 'index';
@@ -28,11 +28,9 @@ if ($page == 'index') {
     $template = new template('index' );
     $template->viewPage('login',["loginForm"]);
 } else if ($page == 'challenges') {
-    $challengeController = new chllengesController($dbc);
-    $challengeController->findBy('id', 1);
-    $variabels['challenge'] = $challengeController;
-    $template = new template('index' );
-    $template->viewPage('challenges',["challengeNavbar","codeSnippet"], $variabels);
+    $challengePage = new chllengesController($dbc);
+    $challengePage->defaultAction(1);
+
 } else if ($page == '404') {
 
     $template = new template('index');
