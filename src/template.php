@@ -7,8 +7,10 @@ class template {
         $this->layoutPage = $layoutPage;
     }
 
-    public function viewPage($pageName,$pageSections)
+    public function viewPage($pageName,$pageSections, $variables)
     {
+        extract($variables);
+//        var_dump($variables);
         include VIEW_PATH . $this->layoutPage . '.html';
     }
 
