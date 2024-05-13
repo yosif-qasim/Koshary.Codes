@@ -24,8 +24,9 @@ class chllengesController extends Entity{
         $template = new template('index' );
         $template->viewPage('challenges',["challengeNavbar","codeSnippet"], $variabels);
         $this->solutionHandel();
-
-
+        if($_SESSION['challengesSoleved'] == 1){
+            $this->crateCertificate();
+        }
     }
 
     public function solutionHandel(){
@@ -34,6 +35,8 @@ class chllengesController extends Entity{
             $solutionLine = htmlspecialchars($_POST['solutionLine']);
             $solutionType = htmlspecialchars($_POST['solutionType']);
             if($solutionLine== $this->solution){
+                $_SESSION['challengesSoleved'] += 1;
+                echo "challenges solved = ".$_SESSION['challengesSoleved'];
                 echo "<div class=\"row text-center \">
                       <div class=\" col-md-4 \" >
                       </div>
@@ -59,8 +62,22 @@ class chllengesController extends Entity{
                     </div>";
             }
         }
-//        header("Location: ./koshary.codes/public/?page=challenges&challengeId=$challengeId");
+    }
 
+    public function crateCertificate()
+    {
+        echo "image ready !!" . "<br>" . "<a href=\"./view/assets/images/new_CERT.png\">download certificate</a>";
+        $image = imagecreatefrompng("./view/assets/images/CERT.png");
+        $color = imagecolorallocate($image, 0, 0, 200);
+        $font = './roboto.ttf';
+        $text = 'Ahmed albanna';
+        $maxWidth = 500;
+        if (strlen($text) > $maxWidth) {
+            $text = substr($text, 0, $maxWidth) . "...";
+        }
+        imagettftext($image, 45, 0, 600, 600, $color, $font, $text);
+        imagepng($image, "./view/assets/images/new_CERT.png");
+        imagedestroy($image);
     }
 
 

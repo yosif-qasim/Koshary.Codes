@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+$_SESSION['challengesSoleved'] = 0;
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR );
 define('VIEW_PATH', ROOT_PATH . 'view' . DIRECTORY_SEPARATOR);
 define('CONTROLLER_PATH', ROOT_PATH . '..' . DIRECTORY_SEPARATOR.'controller' . DIRECTORY_SEPARATOR);
