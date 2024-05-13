@@ -25,6 +25,9 @@ class chllengesController extends Entity{
         $template->viewPage('challenges',["challengeNavbar","codeSnippet"], $variabels);
     }
 
+    public function navChallenge(){
+
+    }
 
 
 

@@ -12,6 +12,7 @@ require_once ROOT_PATH . '../controller/chllengesController.php';
 
 
 $page = $_GET['page'] ?? 'index';
+$challengeId = $_GET['challengeId'] ?? '1';
 
 databaseConnection::connect('127.0.0.1', '3306','kosharyCodes', 'root', '');
 $dbh = databaseConnection::getInstance();
@@ -23,17 +24,16 @@ $page = in_array($page, $allowedPages) ? $page : '404'; // Default to 404 if pag
 
 if ($page == 'index') {
     $template = new template('index');
-    $template->viewPage('landingPage',["hero","features","testimonials","team", "contact"]);
+    $template->viewPage('landingPage',["hero","features","testimonials","team", "contact"],[]);
 } else if ($page == 'login') {
     $template = new template('index' );
     $template->viewPage('login',["loginForm"]);
 } else if ($page == 'challenges') {
     $challengePage = new chllengesController($dbc);
-    $challengePage->defaultAction(1);
-
+    $challengePage->defaultAction($challengeId);
 } else if ($page == '404') {
 
     $template = new template('index');
-    $template->viewPage('error',["404"] );
+    $template->viewPage('error',["404"] ,[]);
 }
 

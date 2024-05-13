@@ -9,29 +9,33 @@
             </div>
         </div>
         <div class="row">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active"    style="background-color:white; color: #0a53be" aria-current="page" href="#">Active</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white"  href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white"  href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white"  href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white"  href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white"  href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" style="color: darkgray" aria-disabled="true">Disabled</a>
-                </li>
+
+            <ul class="nav nav-pills text-nowrap flex-nowrap" style="overflow-x: auto;">
+                <?php
+                for ($i = 1; $i <= 40; $i++) {
+                    echo "<li class=\"nav-item\">";
+                        if ($i == $_GET['challengeId'])
+                            echo "<a class=\"nav-link active\"    style=\"background-color:white; color: #0a53be\" aria-current=\"page\" href=\"#\">challenge $i</a>";
+                        else{
+                    echo "<a class=\"nav-link\" style=\"color: white\"  href=\".?page=challenges&challengeId=$i\">challenge $i</a>";
+                    }
+                echo "</li>";
+                }  ?>
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active"    style="background-color:white; color: #0a53be" aria-current="page" href="#">Active</a>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" style="color: white"  href=".?page=challenges&challengeId=2">Link</a>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link disabled" style="color: darkgray" aria-disabled="true">Disabled</a>-->
+<!--                </li>-->
+
+
             </ul>
         </div>
     </div>
