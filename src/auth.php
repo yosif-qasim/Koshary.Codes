@@ -12,7 +12,7 @@ class auth
 
             if($userObj->id){
                 echo "user found" . "<br>";
-                if($userObj->password===$password){
+                if($userObj->password === hash_hmac("sha256",$password, "k0sh4Ry") ){
                     echo "password correct " . "<br>";
                     return true;
                 }

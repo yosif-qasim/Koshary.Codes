@@ -18,7 +18,7 @@ class signupController
 
         if ($_POST['postAction'] ?? 0 == 1) {
             $username = $_POST['username'] ?? '';
-            $password = $_POST['password'] ?? '';
+            $password = hash_hmac("sha256", $_POST['password'], "k0sh4Ry") ?? '';
             $stmt = $dbc->prepare('INSERT INTO user (username, password) VALUES (?,  ?)');
             if ($stmt->execute([$username, $password])) {
                 return 'User registered successfully!';
