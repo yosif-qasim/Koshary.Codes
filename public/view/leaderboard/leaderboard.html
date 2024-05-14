@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+    <title>Dashboard</title>
+    <style> /* Space between elements */
+        .navbar-nav .nav-item {
+           margin-right: 100px;
+         }
+       
+         /* Hover effect */
+         .nav-link {
+           position: relative;
+           transition: color 0.3s ease;
+         }
+       
+         .nav-link:hover {
+           color: #d5a214 !important; /* Change color on hover */
+         }
+       
+         .nav-link::before {
+           content: '';
+           position: absolute;
+           bottom: -5px;
+           left: 50%;
+           width: 0;
+           height: 0;
+           background-color: transparent;
+           border-style: solid;
+           border-width: 5px;
+           border-color: transparent;
+           transition: all 0.3s ease;
+           transform: translateX(-50%);
+         }
+       
+         .nav-link:hover::before {
+           width: 100%;
+           border-color: #ffc107 transparent transparent transparent;
+         }
+         .btn-outline-light:hover {
+            color: #fff !important; /* Change text color on hover */
+            background-color: #ffc107 !important; /* Change background color on hover */
+            border-color: #ffc107 !important; /* Change border color on hover */
+          }
+        </style>
+</head>
+
+<body>
+
+<!-- ====== Banner Start ====== -->
+<section class="ud-page-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ud-banner-content">
+                    <h1>Leaderboard Page</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ====== Banner End ====== -->
+    <!--Topside-->
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Information
+                    </div>
+                    <div class="card-body">
+                        <marquee behavior="" direction="">
+                            <h3 class="my-4">This is the Information</h3>
+                        </marquee>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Statistics
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="text-decoration-none text-dark" href="staff.html">
+                                    <div class="card my-card shadow text-center p-3">
+                                        <h4>Players <i class="fas fa-users"></i></h4>
+                                        <h3>8</h3>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="text-decoration-none text-dark" >
+                                    <div class="card my-card shadow text-center p-3">
+                                        <h4>Solved Challenages <i class="fas fa-box"></i></h4>
+                                        <h3>
+                                            <?php
+                                                echo $_SESSION['solvedChallenges'] ;
+                                            ?>
+                                        </h3>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="text-decoration-none text-dark" href="">
+                                    <div class="card my-card shadow text-center p-3">
+                                        <h4>Score <i class="fas fa-shipping-fast"></i></h4>
+                                        <h3>
+                                            <?php
+                                                echo $_SESSION['points'];
+                                            ?>
+                                        </h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Topside-->
+
+    <!--Table-->
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-8">
+                <table class="table bg-white">
+                    <thead class="bg-info">
+                        <tr class="text-white">
+                            <th scope="col">Rank</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Handle</th>
+                            <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!--End Table-->
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

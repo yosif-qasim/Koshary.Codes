@@ -33,6 +33,7 @@ abstract class Entity
 
         foreach ($this->fields as $fieldName) {
             $this->$fieldName = $values[$fieldName];
+            $_SESSION[$fieldName] = $values[$fieldName];
 
         }
 

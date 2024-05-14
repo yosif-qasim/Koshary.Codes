@@ -21,6 +21,7 @@ require_once ROOT_PATH . '../model/challenges.php';
 require_once ROOT_PATH . '../controller/loginController.php';
 require_once ROOT_PATH . '../controller/signupController.php';
 require_once ROOT_PATH . '../controller/chllengesController.php';
+require_once ROOT_PATH . '../controller/leaderboardController.php';
 
 
 $page = $_GET['page'] ?? 'index';
@@ -31,7 +32,7 @@ $dbh = databaseConnection::getInstance();
 $dbc = $dbh->getConnection();
 
 // Sanitize input
-$allowedPages = ['index', 'login', 'signup', 'contact','challenges']; // Define allowed pages
+$allowedPages = ['index', 'login', 'signup', 'contact','challenges','leaderboard']; // Define allowed pages
 $page = in_array($page, $allowedPages) ? $page : '404'; // Default to 404 if page not allowed
 
 if ($page == 'index') {
@@ -50,8 +51,10 @@ if ($page == 'index') {
 } else if ($page == 'challenges') {
     $challengePage = new chllengesController($dbc);
     $challengePage->defaultAction($challengeId);
-} else if ($page == '404') {
-
+} else if($page == 'leaderboard'){
+    $leaderboardPage = new leaderboardController();
+    $leaderboardPage->defaultAction();
+}else if ($page == '404') {
     $template = new template('index');
     $template->viewPage('error',["404"] ,[]);
 }
