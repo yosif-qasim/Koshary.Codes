@@ -1,40 +1,33 @@
 <?php
 
-class chllengesController extends Entity{
+class chllengesController {
 
-    public $id;
-    public $code;
-    public $language;
-    public $solution;
-    public $difficulty;
-    public $sourceLink;
-
-
-    public function __construct($dbc){
-        parent::__construct($dbc, 'challenges');
-    }
-
-    public function initFields(){
-        $this->fields = ['id', 'language', 'code', 'solution', 'difficulty', 'sourceLink'];
-    }
 
     public function defaultAction($id){
-        $this->findBy('id', $id);
-        $variabels['challenge'] = $this;
+
+        $dbh = DatabaseConnection::getInstance();
+        $dbc = $dbh->getConnection();
+
+        $challengeObj = new challenges($dbc);
+        $challengeObj->findBy('id', $id);
+
+        $variabels['challenge'] = $challengeObj;
+
         $template = new template('index' );
         $template->viewPage('challenges',["challengeNavbar","codeSnippet"], $variabels);
-        $this->solutionHandel();
+
+        $this->solutionHandel($challengeObj);
         if($_SESSION['challengesSoleved'] == 1){
-            $this->crateCertificate();
+            $this->createCertificate();
         }
     }
 
-    public function solutionHandel(){
+    public function solutionHandel($challengeObj){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $challengeId = htmlspecialchars($_POST['challengeId']);
             $solutionLine = htmlspecialchars($_POST['solutionLine']);
             $solutionType = htmlspecialchars($_POST['solutionType']);
-            if($solutionLine== $this->solution){
+            if($solutionLine== $challengeObj->solution){
                 $_SESSION['challengesSoleved'] += 1;
                 echo "challenges solved = ".$_SESSION['challengesSoleved'];
                 echo "<div class=\"row text-center \">
@@ -44,7 +37,7 @@ class chllengesController extends Entity{
                         Correct solution !!!!!
 
                         <div class=\"alert alert-primary\" role=\"alert\">
-                     code source : <a href=\"" . $this->sourceLink. "\">" . $this->sourceLink ."</a>
+                     code source : <a href=\"" . $challengeObj->sourceLink. "\">" . $challengeObj->sourceLink ."</a>
                     </div> 
                     </div>
                                           <div class=\" col-md-4 \" >
@@ -64,13 +57,13 @@ class chllengesController extends Entity{
         }
     }
 
-    public function crateCertificate()
+    public function createCertificate()
     {
         echo "image ready !!" . "<br>" . "<a href=\"./view/assets/images/new_CERT.png\">download certificate</a>";
         $image = imagecreatefrompng("./view/assets/images/CERT.png");
         $color = imagecolorallocate($image, 0, 0, 200);
         $font = './roboto.ttf';
-        $text = 'Ahmed albanna';
+        $text = 'Akram Hefina';
         $maxWidth = 500;
         if (strlen($text) > $maxWidth) {
             $text = substr($text, 0, $maxWidth) . "...";
