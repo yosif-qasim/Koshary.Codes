@@ -3,10 +3,14 @@
 class chllengesController {
 
 
+    private user $userObj;
+
     public function defaultAction($id){
 
         $dbh = DatabaseConnection::getInstance();
         $dbc = $dbh->getConnection();
+        $this->userObj = new user($dbc);
+        $this->userObj->findBy('id', $_SESSION['userId']);
 
         $challengeObj = new challenges($dbc);
         $challengeObj->findBy('id', $id);
@@ -17,7 +21,7 @@ class chllengesController {
         $template->viewPage('challenges',["challengeNavbar","codeSnippet"], $variabels);
 
         $this->solutionHandel($challengeObj);
-        if($_SESSION['challengesSoleved'] == 1){
+        if($this->userObj->points == 30){
             $this->createCertificate();
         }
     }
@@ -28,8 +32,9 @@ class chllengesController {
             $solutionLine = htmlspecialchars($_POST['solutionLine']);
             $solutionType = htmlspecialchars($_POST['solutionType']);
             if($solutionLine== $challengeObj->solution){
-                $_SESSION['challengesSoleved'] += 1;
-                echo "challenges solved = ".$_SESSION['challengesSoleved'];
+//                $_SESSION['challengesSoleved'] += 1;
+                $this->userObj->increasePoints(10);
+                echo "challenges solved = ". $this->userObj->points . "<br>";
                 echo "<div class=\"row text-center \">
                       <div class=\" col-md-4 \" >
                       </div>
@@ -63,7 +68,7 @@ class chllengesController {
         $image = imagecreatefrompng("./view/assets/images/CERT.png");
         $color = imagecolorallocate($image, 0, 0, 200);
         $font = './roboto.ttf';
-        $text = 'Akram Hefina';
+        $text = $_SESSION['userName'];
         $maxWidth = 500;
         if (strlen($text) > $maxWidth) {
             $text = substr($text, 0, $maxWidth) . "...";

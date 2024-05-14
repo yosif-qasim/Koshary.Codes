@@ -25,6 +25,8 @@ class signupController
 
             $stmt = $dbc->prepare('INSERT INTO user (username, password) VALUES (?,  ?)');
             if ($stmt->execute([$username, $password])) {
+                //redierct to ./?page=login after signup
+                header('Location: ./index.php?page=login');
                 return 'User registered successfully!';
             } else {
                 return 'Error occurred during registration.';
