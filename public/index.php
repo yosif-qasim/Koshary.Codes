@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 ob_start();
 $_SESSION['challengesSoleved'] = 0;
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR );
@@ -32,15 +33,16 @@ $dbh = databaseConnection::getInstance();
 $dbc = $dbh->getConnection();
 
 // Sanitize input
-$allowedPages = ['index', 'login', 'signup', 'contact','challenges','leaderboard']; // Define allowed pages
+$allowedPages = ['index', 'login', 'signup', 'contact','challenges','leaderboard','logout']; // Define allowed pages
 $page = in_array($page, $allowedPages) ? $page : '404'; // Default to 404 if page not allowed
 
 if ($page == 'index') {
     $template = new template('index');
-    $template->viewPage('landingPage',["hero","features","testimonials","team", "contact"],[]);
+    $template->viewPage('landingPage',["hero","features","team"],[]);
 } else if ($page == 'login') {
 //    $template = new template('index' );
 //    $template->viewPage('login',["loginForm"],[]);
+    session_start();
     $loginPage = new loginController();
     $loginPage->defaultAction();
 }else if ($page == 'signup') {
@@ -54,6 +56,11 @@ if ($page == 'index') {
 } else if($page == 'leaderboard'){
     $leaderboardPage = new leaderboardController();
     $leaderboardPage->defaultAction();
+}else if($page == 'logout'){
+    session_destroy();
+    header('Location: ./index.php?page=login');
+    exit();
+
 }else if ($page == '404') {
     $template = new template('index');
     $template->viewPage('error',["404"] ,[]);

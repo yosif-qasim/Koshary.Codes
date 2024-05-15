@@ -2,6 +2,9 @@
 
 class template {
     protected $layoutPage;
+    private $users;
+    private $rank;
+
     public function __construct($layoutPage)
     {
         $this->layoutPage = $layoutPage;
@@ -20,5 +23,20 @@ class template {
             include VIEW_PATH . "$pageName".'/' . $section . '.html';
         }
     }
+
+
+
+
+    /// sorry
+    ///
+         public function getUsers(){
+            $dbh = databaseConnection::getInstance();
+            $dbc = $dbh->getConnection();
+            $query = "SELECT * FROM user";
+            $stmt = $dbc->prepare($query);
+            $stmt->execute();
+            $users = $stmt->fetchAll();
+            $this->users= $users;
+        }
 
 }

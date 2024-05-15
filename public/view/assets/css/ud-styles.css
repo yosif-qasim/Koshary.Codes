@@ -1231,17 +1231,23 @@ p {
   height: 170px;
   position: relative;
   margin: 0px auto 25px;
+  overflow: hidden; /* Ensures any overflow is hidden */
+  border-radius: 50%; /* Ensures the wrapper is circular */
 }
 
 .ud-single-team .ud-team-image {
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Ensures the image container is circular */
+  overflow: hidden; /* Ensures the image fits within the circular container */
 }
 
 .ud-single-team .ud-team-image img {
   width: 100%;
-  border-radius: 50%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+  border-radius: 50%; /* Ensures the image itself is circular */
 }
-
 .ud-single-team .shape {
   position: absolute;
   z-index: -1;

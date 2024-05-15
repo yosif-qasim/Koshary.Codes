@@ -49,7 +49,7 @@ class loginController
                 $userObj->findBy('username', $username);
                 $_SESSION['userId'] = $userObj->id;
 
-                header('Location: http://localhost:63342/koshary.codes/public/?page=challenges&challengeId=1');
+                header('Location: http://localhost:63342/koshary.codes/public/?page=index');
                 exit(); // Ensure immediate exit after redirect
             } else {
                 // Generic error message to avoid hinting at whether username or password was incorrect

@@ -2,9 +2,11 @@
 
 class leaderboardController
 {
-public function defaultAction()
-{
-    $template = new template('index');
-    $template->viewPage('leaderboard',["leaderboard"],[]);
-}
+    public function defaultAction()
+    {
+        $template = new template('index');
+        $template->viewPage('leaderboard',["leaderboard"],[]);
+    }
+
+
 }

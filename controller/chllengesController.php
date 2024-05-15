@@ -64,7 +64,16 @@ class chllengesController {
 
     public function createCertificate()
     {
-        echo "image ready !!" . "<br>" . "<a href=\"./view/assets/images/new_CERT.png\">download certificate</a>";
+//        echo "image ready !!" . "<br>" . "<a href=\"./view/assets/images/new_CERT.png\">download certificate</a>";
+        echo "<div class=\" text-center position-absolute bottom-0 start-50 translate-middle-x  \">
+                      <div class=\" col-md-4 \" >
+                      </div>
+                       <div class=\"alert col-md-12 text-center alert-success\" role=\"alert\">
+                        <h4 class=\"alert-heading\">Well done!</h4> Certificate ready !!" . "<br>" . "<a href=\"./view/assets/images/new_CERT.png\">download certificate</a>
+                    </div>
+                                          <div class=\" col-md-4 \" >
+                      </div>
+                    </div>";
         $image = imagecreatefrompng("./view/assets/images/CERT.png");
         $color = imagecolorallocate($image, 0, 0, 200);
         $font = './roboto.ttf';
